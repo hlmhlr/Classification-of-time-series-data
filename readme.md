@@ -1,19 +1,20 @@
-# Classification of time-series data
+# 🧠 Classification of Time-Series Data
 
-This repository provides an implementation of a TCN-based deep learning pipeline for time-series data classification, in particular, the classification of electrical faults experienced during electric data transmissions. The model is built using Keras and the TCN libraries, with flexible support for training and testing through command-line arguments.
-
+## 📝 Overview
+This repository provides an implementation of a **TCN-based deep learning pipeline** for time-series data classification — particularly focused on detecting **electrical faults** in grid station data. The model is built using **Keras** and the **[TCN](https://github.com/philipperemy/keras-tcn)** library, with flexible support for both training and testing via CLI arguments.
 
 ---
 
 ## 📁 Project Structure
-
+<pre lang="markdown">
 ├── main.py # Main training/testing script
-├── utils_new7.py # Data loading and preprocessing functions
-├── test_plot.py # Evaluation and visualization
+├── utils/
+│ ├── data_generator.py # Data loading and preprocessing
+│ └── test_plot.py # Evaluation and visualization utilities
 ├── best_model_tcn.h5 # (Optional) Pretrained model weights
-├── logs_tcn/ # Default TensorBoard logs directory
-├── README.md
-└── ...
+├── logs_tcn/ # TensorBoard logs
+├── environment.yml # Conda environment file
+└── README.md </pre>
 
 ---
 
@@ -22,82 +23,77 @@ This repository provides an implementation of a TCN-based deep learning pipeline
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/hlmhlr/Classification-of-time-series-data.gitt
-cd roi-extraction-tcn
-2. Create Environment
+git clone https://github.com/hlmhlr/Classification-of-time-series-data.git
+cd Classification-of-time-series-data
+```
+
+### 2. Create Environment
 Using conda:
-
-bash
-Copy
-Edit
+```bash
 conda env create -f environment.yml
-conda activate roi-extraction-env
-OR using pip:
+conda activate time-class-env
+```
 
-bash
-Copy
-Edit
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-📂 Dataset Structure
-Provide your dataset in the following directory format:
+## 📂 Dataset Structure
+Your dataset should follow this structure:
 
-bash
-Copy
-Edit
 /your_dataset_directory/
+<pre lang="markdown">
 ├── train/
 ├── val/
-└── test/
-Each folder should contain the corresponding input data files in a format supported by data_generator() in utils_new7.py.
+└── test/  </pre>
+Each folder should contain the input data files, supported by data_generator() in utils/data_generator.py.
 
-🚀 How to Use
+## 🚀 How to Use
 🔹 Train the Model
-
+```bash
 python main.py \
   --train \
   --dataset_dir /path/to/your_dataset_directory \
   --epochs 50 \
   --batch_size 32 \
   --lr 0.0005
+```
 🔹 Test the Model
-
+```bash
 python main.py \
   --test \
   --dataset_dir /path/to/your_dataset_directory \
   --model_weights /path/to/best_model_tcn.h5
-🔹 Train and Test Together
+```
 
+🔹 Train and Test Together
+```bash
 python main.py \
   --train \
   --test \
   --dataset_dir /path/to/your_dataset_directory \
   --model_weights /path/to/best_model_tcn.h5
+```
+  
+## ⚙️ Command-Line Arguments
+| Argument         | Description                              | Default        |
+|------------------|------------------------------------------|----------------|
+| `--train`        | Train the model                          | `False`        |
+| `--test`         | Test the model                           | `True`         |
+| `--dataset_dir`  | Path to the root dataset directory       | *(Required)*   |
+| `--model_weights`| Path to `.h5` weights file for testing   | `None`         |
+| `--log_dir`      | TensorBoard log directory                | `logs_tcn`     |
+| `--epochs`       | Number of training epochs                | `30`           |
+| `--batch_size`   | Training batch size                      | `64`           |
+| `--lr`           | Learning rate                            | `0.001`        |
 
-⚙️ Command-Line Arguments
-
-Argument	Description	Default
---train	Train the model	False
---test	Test the model	True
---dataset_dir	Path to the root dataset directory	(Required)
---model_weights	Path to .h5 weights file for testing	None
---log_dir	TensorBoard log directory	logs_tcn
---epochs	Number of training epochs	30
---batch_size	Training batch size	64
---lr	Learning rate	0.001
-
-📈 TensorBoard Logs
-After training, you can view logs by running:
-
+## 📈 TensorBoard Logs
+To visualize training:
+```bash
 tensorboard --logdir=logs_tcn
+```
 
-🧪 Requirements
-See environment.yml
+## 🧪 Requirements
+See environment.yml for all dependencies.
 
- Contact
-For questions or collaboration, please open an issue. 
+## 📬 Contact
+For issues, suggestions, or collaboration, feel free to open an issue.
 
-📄 License
-MIT License. See LICENSE file for details.
----
+## 📄 License
+To be updated. 
