@@ -180,14 +180,9 @@ tensorboard --logdir=logs_tcn
 ## 📊 Model Output: Confusion Matrix
 
 After training or testing the model, performance is evaluated using class-wise accuracies and a **confusion matrix** to visualize prediction results across all classes.
+This matrix provides insight into how well the model is classifying each fault type based on the true vs. predicted labels. Example output:
 
-This matrix provides insight into how well the model is classifying each fault type based on the true vs. predicted labels.
-
-Example output:
-
-![Confusion Matrix](results/confusion_matrix_example.png)
-
-> You can find your confusion matrix plots and evaluation results saved in the `results/` directory after model testing.
+<img src="https://github.com/user-attachments/assets/84ea3364-29fb-4946-b1cd-f97ceca06354" alt="Confusion Matrix" width="400"/>
 
 
 
