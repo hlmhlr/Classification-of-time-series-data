@@ -13,13 +13,8 @@ This repository provides an implementation of a **TCN-based deep learning pipeli
 │   ├── train
 │   └── val
 ├── environment.yml
-├── environment_original_extracted.yml
-├── logs_tcn
 ├── main.py
 ├── readme.md
-├── results
-├── results_gru
-│   ├── confusion_matrix.png
 ├── utils
 │   ├── data_generator.py
 │   ├── model.py
