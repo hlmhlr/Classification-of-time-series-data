@@ -7,14 +7,26 @@ This repository provides an implementation of a **TCN-based deep learning pipeli
 
 ## 📁 Project Structure
 <pre lang="markdown">
-├── main.py # Main training/testing script
-├── utils/
-│ ├── data_generator.py # Data loading and preprocessing
-│ └── test_plot.py # Evaluation and visualization utilities
-├── best_model_tcn.h5 # (Optional) Pretrained model weights
-├── logs_tcn/ # TensorBoard logs
-├── environment.yml # Conda environment file
-└── README.md </pre>
+.
+├── dataset
+│   ├── test
+│   ├── train
+│   └── val
+├── environment.yml
+├── environment_original_extracted.yml
+├── logs_tcn
+├── main.py
+├── readme.md
+├── results
+├── results_gru
+│   ├── confusion_matrix.png
+├── utils
+│   ├── data_generator.py
+│   ├── model.py
+│   └── test_plot.py
+└── weights
+    └── best_model.h5 </pre>
+
 
 ---
 
@@ -44,33 +56,85 @@ Your dataset should follow this structure:
 └── test/  </pre>
 Each folder should contain the input data files, supported by data_generator() in utils/data_generator.py.
 
+
+
 ## 🚀 How to Use
-🔹 Train the Model
+
+### 🔧 Train the Model
+
 ```bash
+# TCN Model
 python main.py \
   --train \
+  --model tcn \
   --dataset_dir /path/to/your_dataset_directory \
   --epochs 50 \
   --batch_size 32 \
-  --lr 0.0005
+  --lr 0.0005 \
+  --optimizer adam \
+  --loss sparse_categorical_crossentropy \
+  --results_dir ./results_tcn
 ```
-🔹 Test the Model
 ```bash
-python main.py \
-  --test \
-  --dataset_dir /path/to/your_dataset_directory \
-  --model_weights /path/to/best_model_tcn.h5
-```
-
-🔹 Train and Test Together
-```bash
+# GRU Model
 python main.py \
   --train \
-  --test \
+  --model gru \
   --dataset_dir /path/to/your_dataset_directory \
-  --model_weights /path/to/best_model_tcn.h5
+  --epochs 50 \
+  --batch_size 32 \
+  --lr 0.0005 \
+  --optimizer adam \
+  --loss sparse_categorical_crossentropy \
+  --results_dir ./results_gru
 ```
-  
+
+```bash
+# LSTM Model
+python main.py \
+  --train \
+  --model lstm \
+  --dataset_dir /path/to/your_dataset_directory \
+  --epochs 50 \
+  --batch_size 32 \
+  --lr 0.0005 \
+  --optimizer adam \
+  --loss sparse_categorical_crossentropy \
+  --results_dir ./results_lstm
+  ```
+
+🧪 Test the Model
+
+```bash
+# Test TCN Model
+python main.py \
+  --test \
+  --model tcn \
+  --dataset_dir /path/to/your_dataset_directory \
+  --model_weights ./results_tcn/tcn_best_weights.h5 \
+  --results_dir ./results_tcn
+```
+
+```bash
+# Test GRU Model
+python main.py \
+  --test \
+  --model gru \
+  --dataset_dir /path/to/your_dataset_directory \
+  --model_weights ./results_gru/gru_best_weights.h5 \
+  --results_dir ./results_gru
+```
+```bash
+# Test LSTM Model
+python main.py \
+  --test \
+  --model lstm \
+  --dataset_dir /path/to/your_dataset_directory \
+  --model_weights ./results_lstm/lstm_best_weights.h5 \
+  --results_dir ./results_lstm
+```
+
+
 ## ⚙️ Command-Line Arguments
 | Argument         | Description                              | Default        |
 |------------------|------------------------------------------|----------------|
